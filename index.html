@@ -24,8 +24,6 @@
         ::-webkit-scrollbar { width: 8px; background: #000; }
         ::-webkit-scrollbar-thumb { background: var(--neon-green); }
         .threat-panel-fixed { background: white !important; color: black !important; border: 3px solid white !important; box-shadow: 6px 6px 0px var(--neon-green) !important; }
-        
-        /* Ajuste para quebra de palavras longas em telas pequenas */
         h2, p { overflow-wrap: break-word; word-wrap: break-word; }
     </style>
 </head>
@@ -40,7 +38,7 @@
     <header class="pt-24 md:pt-28 p-4 md:p-8 border-b-4 border-green-500 bg-black/95">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
             <div>
-                <span class="text-[10px] bg-green-500 text-black px-2 font-bold italic">V_5.6 // RESPONSIVE_SYNC</span>
+                <span class="text-[10px] bg-green-500 text-black px-2 font-bold italic">V_5.7 // FULL_INTEL_RESTORATION</span>
                 <h1 class="huge-text text-5xl md:text-8xl mt-2">CYBER<br>RAW_HUB_</h1>
             </div>
             <div class="text-left md:text-right font-mono text-[10px] opacity-80">
@@ -69,26 +67,31 @@
 
                 <div class="w-full bg-gray-200 h-6 border-2 border-black mb-6 overflow-hidden relative">
                     <div id="risk-bar" class="bg-black h-full transition-all duration-1000" style="width: 0%"></div>
-                    <span class="absolute inset-0 flex items-center justify-center text-[9px] font-black mix-blend-difference text-white uppercase italic">Exposure_Index</span>
+                    <span class="absolute inset-0 flex items-center justify-center text-[9px] font-black mix-blend-difference text-white uppercase italic">Soren_Exposure_Index</span>
                 </div>
 
                 <div class="space-y-3 mb-6">
                     <div class="border-l-4 border-black pl-3 flex justify-between items-center">
-                        <span class="text-xs font-black uppercase">VULNS:</span>
+                        <span id="vector-1-label" class="text-[10px] font-black uppercase">VULNERABILITIES</span>
                         <span id="vector-1-val" class="font-mono text-xs">0</span>
                     </div>
                     <div class="border-l-4 border-black pl-3 flex justify-between items-center">
-                        <span class="text-xs font-black uppercase">ATTACKS:</span>
+                        <span id="vector-2-label" class="text-[10px] font-black uppercase">ACTIVE_ATTACKS</span>
                         <span id="vector-2-val" class="font-mono text-xs">0</span>
+                    </div>
+                    <div class="border-l-4 border-black pl-3 flex justify-between items-center">
+                        <span id="vector-3-label" class="text-[10px] font-black uppercase">DATA_EXPOSURE</span>
+                        <span id="vector-3-val" class="font-mono text-xs">0</span>
                     </div>
                 </div>
 
-                <div id="threat-alert-box" class="bg-black text-white p-3 font-mono text-[9px] uppercase leading-tight min-h-[50px]">
-                    > STATUS: ANALYZING_DATA...
+                <div id="threat-alert-box" class="bg-black text-white p-3 font-mono text-[9px] uppercase leading-tight min-h-[55px]">
+                    <span class="text-green-500 font-bold">> SYNC_INITIATED</span><br>
+                    <span>ANALYZING DATA... STANDBY.</span>
                 </div>
                 
-                <button id="rescan-btn" class="w-full bg-black text-white mt-4 p-3 font-bold hover:bg-green-500 hover:text-black transition text-xs uppercase">
-                    FORCE_SYNC
+                <button id="rescan-btn" class="w-full bg-black text-white mt-4 p-3 font-bold hover:bg-green-500 hover:text-black transition text-xs uppercase shadow-[4px_4px_0px_#00ff41]">
+                    FORCE_SYNC_ALL
                 </button>
             </div>
 
@@ -127,7 +130,7 @@
                 const lat = Date.now() - start;
                 let stateLabel = online ? "STABLE" : "OFFLINE";
                 let stateClass = online ? "status-stable" : "status-offline animate-pulse";
-                container.innerHTML += `<div class="flex justify-between items-center ${stateClass} pb-1 border-b border-green-900/20"><span>${s.name}</span><span>[${stateLabel}]</span></div>`;
+                container.innerHTML += `<div class="flex justify-between items-center ${stateClass} pb-1 border-b border-green-900/10"><span>${s.name}</span><span class="flex gap-3"><span class="opacity-40">${lat}ms</span><span>[${stateLabel}]</span></span></div>`;
             }
         }
 
@@ -135,26 +138,33 @@
             const riskBar = document.getElementById('risk-bar');
             const riskPercent = document.getElementById('risk-percent');
             const alertBox = document.getElementById('threat-alert-box');
-            const v1Val = document.getElementById('vector-1-val');
-            const v2Val = document.getElementById('vector-2-val');
+            const v1 = { label: document.getElementById('vector-1-label'), val: document.getElementById('vector-1-val'), count: 0 };
+            const v2 = { label: document.getElementById('vector-2-label'), val: document.getElementById('vector-2-val'), count: 0 };
+            const v3 = { label: document.getElementById('vector-3-label'), val: document.getElementById('vector-3-val'), count: 0 };
+            
             const content = articles.map(a => (a.title + a.description).toLowerCase()).join(' ');
             
-            const v1 = (content.match(/vulnerability|zero-day|cve|flaw/g) || []).length;
-            const v2 = (content.match(/ransomware|attack|hacked|exploit/g) || []).length;
+            v1.count = (content.match(/vulnerability|zero-day|cve|patch|flaw|critical/g) || []).length;
+            v2.count = (content.match(/ransomware|attack|malware|hacked|spyware|trojan|exploit/g) || []).length;
+            v3.count = (content.match(/leak|breach|exposed|stolen|database|credentials|data/g) || []).length;
 
-            v1Val.innerText = v1; v2Val.innerText = v2;
-            let totalRisk = Math.min((v1 + v2) * 3, 100);
+            v1.val.innerText = v1.count; v1.label.innerText = v1.count > 0 ? "VULNS_DETECTED" : "VULNERABILITIES";
+            v2.val.innerText = v2.count; v2.label.innerText = v2.count > 0 ? "ATTACKS_LIVE" : "ACTIVE_ATTACKS";
+            v3.val.innerText = v3.count; v3.label.innerText = v3.count > 0 ? "DATA_EXPOSURE" : "DATA_EXPOSURE";
+
+            let totalRisk = Math.min((v1.count + v2.count + v3.count) * 2, 100);
             riskBar.style.width = totalRisk + '%'; riskPercent.innerText = totalRisk + '%';
 
-            if(totalRisk < 20) alertBox.innerHTML = `> STATUS: SECURE<br>System calm.`;
-            else if(totalRisk < 60) alertBox.innerHTML = `> STATUS: ELEVATED<br>Threats trending up.`;
-            else alertBox.innerHTML = `> STATUS: CRITICAL<br>Global breaches detected.`;
+            if(totalRisk < 20) alertBox.innerHTML = `<span class="text-green-500 font-bold">> STATUS: SECURE</span><br><span>System calm. Initiative Søren in standby.</span>`;
+            else if(totalRisk < 60) alertBox.innerHTML = `<span class="text-yellow-500 font-bold">> STATUS: ELEVATED</span><br><span>Threats detected. Higher alertness required.</span>`;
+            else alertBox.innerHTML = `<span class="text-red-500 font-bold animate-pulse">> STATUS: CRITICAL_DANGER</span><br><span>Global breaches detected. Active defense.</span>`;
         }
 
         async function fetchAllNews() {
             const feeds = [
                 { url: 'https://thehackernews.com/feeds/posts/default', tag: 'HACKER_NEWS' },
-                { url: 'https://www.bleepingcomputer.com/feed/', tag: 'BLEEPING_COM' }
+                { url: 'https://www.bleepingcomputer.com/feed/', tag: 'BLEEPING_COM' },
+                { url: 'https://threatpost.com/feed/', tag: 'THREAT_POST' }
             ];
             const container = document.getElementById('news-container');
             const marquee = document.getElementById('marquee-data');
@@ -177,8 +187,8 @@
                     </div>
                     <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-none">${item.title.toUpperCase()}</h2>
                     <div class="brutal-card p-4 md:p-8">
-                        <p class="text-base md:text-lg font-light mb-4 lowercase text-green-100/70">${item.description.substring(0, 150).replace(/<[^>]*>?/gm, '')}...</p>
-                        <a href="${item.link}" target="_blank" class="inline-block border-2 border-green-500 px-4 py-1 bg-green-500 text-black font-bold text-xs uppercase italic">Source_Link</a>
+                        <p class="text-base md:text-lg font-light mb-4 lowercase text-green-100/70">${item.description.substring(0, 160).replace(/<[^>]*>?/gm, '')}...</p>
+                        <a href="${item.link}" target="_blank" class="inline-block border-2 border-green-500 px-4 py-1 bg-green-500 text-black font-bold text-xs uppercase italic">Read_Intel_Source</a>
                     </div>
                 `;
                 container.appendChild(article);
