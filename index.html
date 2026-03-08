@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CYBER_RAW_HUB // SOREN_SYSTEMS</title>
-
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>👁️‍🗨️</text></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,17 +13,20 @@
         :root { --neon-green: #00ff41; --dark-bg: #000000; }
         body { background-color: var(--dark-bg); color: var(--neon-green); font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; overflow-x: hidden; margin: 0; }
         .lab-grid { background-image: linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px); background-size: 40px 40px; background-attachment: fixed; }
-        .brutal-card { border: 3px solid var(--neon-green); background: var(--dark-bg); box-shadow: 8px 8px 0px var(--neon-green); }
-        .huge-text { font-family: 'Syncopate', sans-serif; line-height: 0.85; letter-spacing: -3px; }
+        .brutal-card { border: 3px solid var(--neon-green); background: var(--dark-bg); box-shadow: 6px 6px 0px var(--neon-green); }
+        .huge-text { font-family: 'Syncopate', sans-serif; line-height: 0.85; letter-spacing: -2px; }
         .marquee-container { background: var(--neon-green); color: black; padding: 10px 0; font-weight: 800; border-bottom: 4px solid black; overflow: hidden; white-space: nowrap; display: flex; position: fixed; top: 0; width: 100%; z-index: 100; }
         .marquee-content { display: inline-block; animation: marquee 40s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .status-stable { color: var(--neon-green); }
         .status-degraded { color: #facc15; }
         .status-offline { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
-        ::-webkit-scrollbar { width: 10px; background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--neon-green); border: 2px solid black; }
-        .threat-panel-fixed { background: white !important; color: black !important; border: 3px solid white !important; box-shadow: 8px 8px 0px var(--neon-green) !important; }
+        ::-webkit-scrollbar { width: 8px; background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--neon-green); }
+        .threat-panel-fixed { background: white !important; color: black !important; border: 3px solid white !important; box-shadow: 6px 6px 0px var(--neon-green) !important; }
+        
+        /* Ajuste para quebra de palavras longas em telas pequenas */
+        h2, p { overflow-wrap: break-word; word-wrap: break-word; }
     </style>
 </head>
 <body class="lab-grid">
@@ -34,13 +37,13 @@
         </div>
     </div>
 
-    <header class="pt-28 p-8 border-b-4 border-green-500 bg-black/95">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end">
+    <header class="pt-24 md:pt-28 p-4 md:p-8 border-b-4 border-green-500 bg-black/95">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
             <div>
-                <span class="text-xs bg-green-500 text-black px-2 font-bold italic">V_5.5 // Initiative by Søren </span>
-                <h1 class="huge-text text-6xl md:text-8xl mt-2">CYBER<br>RAW_HUB_</h1>
+                <span class="text-[10px] bg-green-500 text-black px-2 font-bold italic">V_5.6 // RESPONSIVE_SYNC</span>
+                <h1 class="huge-text text-5xl md:text-8xl mt-2">CYBER<br>RAW_HUB_</h1>
             </div>
-            <div class="text-right font-mono text-xs mt-6 md:mt-0 opacity-80">
+            <div class="text-left md:text-right font-mono text-[10px] opacity-80">
                 <p id="clock">TIME: --:--:--</p>
                 <p class="text-white font-black">MULTI_FEED: ACTIVE</p>
                 <p>STATUS: OPERATIONAL</p>
@@ -48,71 +51,56 @@
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto p-8 grid grid-cols-12 gap-10">
+    <main class="max-w-7xl mx-auto p-4 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10">
         
-        <div id="news-container" class="col-span-12 lg:col-span-8 space-y-16">
-            <div class="p-20 text-center brutal-card border-dashed">
-                <h3 class="animate-pulse tracking-widest text-2xl uppercase italic">Merging_Global_Feeds...</h3>
+        <div id="news-container" class="order-2 lg:order-1 col-span-1 lg:col-span-8 space-y-12 md:space-y-16">
+            <div class="p-10 md:p-20 text-center brutal-card border-dashed">
+                <h3 class="animate-pulse tracking-widest text-xl md:text-2xl uppercase italic">Merging_Global_Feeds...</h3>
             </div>
         </div>
 
-        <aside class="col-span-12 lg:col-span-4 space-y-8">
+        <aside class="order-1 lg:order-2 col-span-1 lg:col-span-4 space-y-8">
             
-            <div id="threat-card" class="brutal-card p-6 threat-panel-fixed">
+            <div id="threat-card" class="brutal-card p-4 md:p-6 threat-panel-fixed">
                 <div class="flex justify-between items-start mb-4">
-                    <h3 class="font-black text-2xl italic underline uppercase">Threat_Intel</h3>
+                    <h3 class="font-black text-xl italic underline uppercase">Threat_Intel</h3>
                     <span id="risk-percent" class="bg-black text-white px-2 font-mono text-sm">0%</span>
                 </div>
 
                 <div class="w-full bg-gray-200 h-6 border-2 border-black mb-6 overflow-hidden relative">
                     <div id="risk-bar" class="bg-black h-full transition-all duration-1000" style="width: 0%"></div>
-                    <span class="absolute inset-0 flex items-center justify-center text-[9px] font-black mix-blend-difference text-white uppercase italic">Soren_Exposure_Index</span>
+                    <span class="absolute inset-0 flex items-center justify-center text-[9px] font-black mix-blend-difference text-white uppercase italic">Exposure_Index</span>
                 </div>
 
-                <div class="space-y-4 mb-6">
-                    <div class="border-l-4 border-black pl-3">
-                        <p class="text-[9px] font-bold opacity-70 italic">VULNERABILITIES</p>
-                        <div class="flex justify-between items-end"><span id="vector-1-label" class="text-xs font-black uppercase">Scanning...</span><span id="vector-1-val" class="font-mono text-[10px]">0</span></div>
+                <div class="space-y-3 mb-6">
+                    <div class="border-l-4 border-black pl-3 flex justify-between items-center">
+                        <span class="text-xs font-black uppercase">VULNS:</span>
+                        <span id="vector-1-val" class="font-mono text-xs">0</span>
                     </div>
-                    <div class="border-l-4 border-black pl-3">
-                        <p class="text-[9px] font-bold opacity-70 italic">ACTIVE_ATTACKS</p>
-                        <div class="flex justify-between items-end"><span id="vector-2-label" class="text-xs font-black uppercase">Scanning...</span><span id="vector-2-val" class="font-mono text-[10px]">0</span></div>
-                    </div>
-                    <div class="border-l-4 border-black pl-3">
-                        <p class="text-[9px] font-bold opacity-70 italic">DATA_EXPOSURE</p>
-                        <div class="flex justify-between items-end"><span id="vector-3-label" class="text-xs font-black uppercase">Scanning...</span><span id="vector-3-val" class="font-mono text-[10px]">0</span></div>
+                    <div class="border-l-4 border-black pl-3 flex justify-between items-center">
+                        <span class="text-xs font-black uppercase">ATTACKS:</span>
+                        <span id="vector-2-val" class="font-mono text-xs">0</span>
                     </div>
                 </div>
 
-                <div id="threat-alert-box" class="bg-black text-white p-3 font-mono text-[10px] uppercase leading-tight min-h-[60px]">
-                    <span class="text-green-500 font-bold">> SYNC_INITIATED</span><br>
-                    <span id="status-text">ANALYZING CROSS-FEED DATA... STANDBY.</span>
+                <div id="threat-alert-box" class="bg-black text-white p-3 font-mono text-[9px] uppercase leading-tight min-h-[50px]">
+                    > STATUS: ANALYZING_DATA...
                 </div>
                 
-                <button id="rescan-btn" class="w-full bg-black text-white mt-4 p-3 font-bold hover:bg-green-500 hover:text-black transition text-xs uppercase shadow-[4px_4px_0px_#00ff41]">
-                    FORCE_SYNC_ALL
+                <button id="rescan-btn" class="w-full bg-black text-white mt-4 p-3 font-bold hover:bg-green-500 hover:text-black transition text-xs uppercase">
+                    FORCE_SYNC
                 </button>
             </div>
 
-            <div class="brutal-card p-6 border-dashed">
-                <h3 class="font-bold border-b-2 border-green-500 mb-6 text-xl text-white underline italic uppercase tracking-tighter">Infra_Pulse_</h3>
-                <div id="status-checker" class="space-y-4 font-bold font-mono text-[10px]"></div>
-                
-                <div class="mt-8 pt-4 border-t border-green-900 grid grid-cols-3 gap-2 text-[8px] font-mono text-center">
-                    <div class="text-green-500">[STABLE]<br>EXCELLENT</div>
-                    <div class="text-yellow-500">[DEGRADED]<br>LATENCY</div>
-                    <div class="text-red-500">[OFFLINE]<br>DOWN</div>
-                </div>
-            </div>
-
-            <div class="text-[9px] font-mono opacity-40 leading-tight h-16 overflow-hidden border-l border-green-900 pl-2" id="terminal-logs">
-                > PROTOCOL_SOREN_V5_ONLINE...<br>
+            <div class="brutal-card p-4 md:p-6 border-dashed">
+                <h3 class="font-bold border-b-2 border-green-500 mb-4 text-lg text-white underline italic uppercase tracking-tighter">Infra_Pulse_</h3>
+                <div id="status-checker" class="space-y-3 font-bold font-mono text-[10px]"></div>
             </div>
         </aside>
 
     </main>
 
-    <footer class="p-12 border-t-4 border-green-500 bg-black text-center text-[10px] tracking-[10px] opacity-100 uppercase font-black text-green-500">
+    <footer class="p-8 border-t-4 border-green-500 bg-black text-center text-[10px] md:tracking-[10px] uppercase font-black text-green-500">
         Initiative by Søren - 2026
     </footer>
 
@@ -125,11 +113,10 @@
 
         async function checkStatus() {
             const services = [
-                { name: 'CLOUDFLARE_EDGE', url: 'https://1.1.1.1' },
+                { name: 'CLOUDFLARE', url: 'https://1.1.1.1' },
                 { name: 'GOOGLE_CORE', url: 'https://8.8.8.8' },
                 { name: 'VERCEL_EDGE', url: 'https://vercel.com' },
-                { name: 'GITHUB_NODES', url: 'https://github.com' },
-                { name: 'AZURE_CORE', url: 'https://azure.microsoft.com' }
+                { name: 'GITHUB_NODES', url: 'https://github.com' }
             ];
             const container = document.getElementById('status-checker');
             container.innerHTML = '';
@@ -138,10 +125,9 @@
                 let online = true;
                 try { await fetch(s.url, { mode: 'no-cors', cache: 'no-cache' }); } catch (e) { online = false; }
                 const lat = Date.now() - start;
-                let stateLabel = "STABLE"; let stateClass = "status-stable";
-                if(!online) { stateLabel = "OFFLINE"; stateClass = "status-offline animate-pulse"; }
-                else if(lat > 400) { stateLabel = "DEGRADED"; stateClass = "status-degraded"; }
-                container.innerHTML += `<div class="flex justify-between items-center ${stateClass} border-b border-green-900/10 pb-1"><span>${s.name}</span><span class="flex gap-4"><span class="opacity-40">${lat}ms</span><span class="font-black">[${stateLabel}]</span></span></div>`;
+                let stateLabel = online ? "STABLE" : "OFFLINE";
+                let stateClass = online ? "status-stable" : "status-offline animate-pulse";
+                container.innerHTML += `<div class="flex justify-between items-center ${stateClass} pb-1 border-b border-green-900/20"><span>${s.name}</span><span>[${stateLabel}]</span></div>`;
             }
         }
 
@@ -149,63 +135,50 @@
             const riskBar = document.getElementById('risk-bar');
             const riskPercent = document.getElementById('risk-percent');
             const alertBox = document.getElementById('threat-alert-box');
-            const v1 = { label: document.getElementById('vector-1-label'), val: document.getElementById('vector-1-val'), count: 0 };
-            const v2 = { label: document.getElementById('vector-2-label'), val: document.getElementById('vector-2-val'), count: 0 };
-            const v3 = { label: document.getElementById('vector-3-label'), val: document.getElementById('vector-3-val'), count: 0 };
+            const v1Val = document.getElementById('vector-1-val');
+            const v2Val = document.getElementById('vector-2-val');
             const content = articles.map(a => (a.title + a.description).toLowerCase()).join(' ');
             
-            v1.count = (content.match(/vulnerability|zero-day|cve|patch|flaw|critical/g) || []).length;
-            v2.count = (content.match(/ransomware|attack|malware|hacked|spyware|trojan|cyber|exploit/g) || []).length;
-            v3.count = (content.match(/leak|breach|exposed|stolen|database|credentials|data/g) || []).length;
+            const v1 = (content.match(/vulnerability|zero-day|cve|flaw/g) || []).length;
+            const v2 = (content.match(/ransomware|attack|hacked|exploit/g) || []).length;
 
-            v1.val.innerText = v1.count; v1.label.innerText = v1.count > 0 ? "VULNS_DETECTED" : "NO_EXPOSURE";
-            v2.val.innerText = v2.count; v2.label.innerText = v2.count > 0 ? "ATTACKS_LIVE" : "NOMINAL";
-            v3.val.innerText = v3.count; v3.label.innerText = v3.count > 0 ? "DATA_EXPOSURE" : "SECURE";
-
-            let totalRisk = Math.min((v1.count + v2.count + v3.count) * 2, 100);
+            v1Val.innerText = v1; v2Val.innerText = v2;
+            let totalRisk = Math.min((v1 + v2) * 3, 100);
             riskBar.style.width = totalRisk + '%'; riskPercent.innerText = totalRisk + '%';
 
-            if(totalRisk < 20) alertBox.innerHTML = `<span class="text-green-500 font-bold">> STATUS: SECURE</span><br><span>System calm. Initiative Soren in standby.</span>`;
-            else if(totalRisk < 60) alertBox.innerHTML = `<span class="text-yellow-500 font-bold">> STATUS: ELEVATED</span><br><span>Threats trending. Higher alertness required.</span>`;
-            else alertBox.innerHTML = `<span class="text-red-500 font-bold animate-pulse">> STATUS: CRITICAL_DANGER</span><br><span>Global breaches detected. Initiative Soren active defense.</span>`;
+            if(totalRisk < 20) alertBox.innerHTML = `> STATUS: SECURE<br>System calm.`;
+            else if(totalRisk < 60) alertBox.innerHTML = `> STATUS: ELEVATED<br>Threats trending up.`;
+            else alertBox.innerHTML = `> STATUS: CRITICAL<br>Global breaches detected.`;
         }
 
         async function fetchAllNews() {
             const feeds = [
                 { url: 'https://thehackernews.com/feeds/posts/default', tag: 'HACKER_NEWS' },
-                { url: 'https://www.bleepingcomputer.com/feed/', tag: 'BLEEPING_COM' },
-                { url: 'https://threatpost.com/feed/', tag: 'THREAT_POST' }
+                { url: 'https://www.bleepingcomputer.com/feed/', tag: 'BLEEPING_COM' }
             ];
             const container = document.getElementById('news-container');
             const marquee = document.getElementById('marquee-data');
-            container.innerHTML = `<div class="p-20 text-center brutal-card border-dashed"><h3 class="animate-pulse tracking-widest text-2xl uppercase italic italic">SOREN_AGREGATOR_SYNC...</h3></div>`;
             let allArticles = [];
             for (const f of feeds) {
                 try {
                     const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}`);
                     const data = await response.json();
-                    if(data.items) {
-                        data.items.forEach(item => {
-                            item.tag = f.tag;
-                            allArticles.push(item);
-                        });
-                    }
+                    if(data.items) data.items.forEach(item => { item.tag = f.tag; allArticles.push(item); });
                 } catch (e) { console.warn(`Feed error: ${f.tag}`); }
             }
             allArticles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
             container.innerHTML = ''; let marqueeText = '';
-            allArticles.slice(0, 8).forEach((item, index) => {
+            allArticles.slice(0, 8).forEach(item => {
                 marqueeText += ` [ ${item.tag}: ${item.title.toUpperCase()} ] — `;
                 const article = document.createElement('article');
                 article.innerHTML = `
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="bg-white text-black px-3 py-0.5 font-bold text-[9px] uppercase tracking-tighter">${item.tag}</span>
-                        <span class="text-[10px] tracking-widest text-white/50">${new Date(item.pubDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} | ${new Date(item.pubDate).toLocaleDateString()}</span>
+                    <div class="mb-2">
+                        <span class="bg-white text-black px-2 py-0.5 font-bold text-[9px] uppercase">${item.tag}</span>
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-none hover:text-white transition-colors cursor-default">${item.title.toUpperCase()}</h2>
-                    <div class="brutal-card p-8 hover:shadow-[12px_12px_0px_#fff] transition-all">
-                        <p class="text-lg font-light mb-6 lowercase text-green-100/70">${item.description.substring(0, 180).replace(/<[^>]*>?/gm, '')}...</p>
-                        <a href="${item.link}" target="_blank" class="inline-block border-2 border-green-500 px-6 py-2 bg-green-500 text-black font-bold text-xs uppercase italic">Read_Intel_Source</a>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-none">${item.title.toUpperCase()}</h2>
+                    <div class="brutal-card p-4 md:p-8">
+                        <p class="text-base md:text-lg font-light mb-4 lowercase text-green-100/70">${item.description.substring(0, 150).replace(/<[^>]*>?/gm, '')}...</p>
+                        <a href="${item.link}" target="_blank" class="inline-block border-2 border-green-500 px-4 py-1 bg-green-500 text-black font-bold text-xs uppercase italic">Source_Link</a>
                     </div>
                 `;
                 container.appendChild(article);
@@ -215,9 +188,7 @@
         }
 
         document.getElementById('rescan-btn').onclick = () => { fetchAllNews(); checkStatus(); };
-        fetchAllNews();
-        checkStatus();
-        updateClock();
+        fetchAllNews(); checkStatus(); updateClock();
         setInterval(checkStatus, 60000);
     </script>
 </body>
